@@ -165,11 +165,39 @@ const UserProfile = async (req,res) => {
 }
 // Get Single User By Id Api end here
 
+// Status change Api start here
+const UserAdmin = async (req,res) => {
+    const Ids = req.params.id;
+try{
+    const status = await User.findByIdAndUpdate(
+        Ids, 
+       { $set:req.body} ,
+        {new :true}
+    )
+    const {isAdmin , ...other} = status
+    res.send({
+        message:"Status Change Successfully",
+        status:200,
+        data:isAdmin
+    })
+}catch(err){
+    res.send({
+        message:"Status Not Changed",
+        status:404
+    })
+}
+
+}
+// Status change Api end here
+
+
+
 module.exports = {
     UserRegistration,
     GetAllUser,
     UserLogin,
     UserUpdate,
     UserDelete,
-    UserProfile
+    UserProfile,
+    UserAdmin
 }

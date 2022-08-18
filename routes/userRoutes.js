@@ -5,7 +5,8 @@ const {
     UserLogin,
     UserUpdate ,
     UserDelete ,
-    UserProfile
+    UserProfile,
+    UserAdmin
  } = require('../controller/UserController')
 
 router.post('/register' , UserRegistration )
@@ -14,5 +15,5 @@ router.post('/login' , UserLogin)
 router.put('/:id' , UserUpdate )
 router.delete('/:id' , UserDelete)
 router.get('/:id' , UserProfile)
-
+router.put("/status/:id" , UserAdmin)
 module.exports = router;

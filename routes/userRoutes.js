@@ -15,6 +15,4 @@ router.put('/:id' , UserUpdate )
 router.delete('/:id' , UserDelete)
 router.get('/:id' , UserProfile)
 
-
-
 module.exports = router;

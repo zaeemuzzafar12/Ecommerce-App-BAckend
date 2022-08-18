@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express()
 const databaseConnection = require('./databaseConnection');
-const userRoutes = require('./routes/userRoutes')
-const productRoutes = require('./routes/productRoutes')
-const categoryRoutes = require('./routes/categoryRoutes')
-const cartRoutes = require('./routes/cartRoutes')
-const orderRoutes = require('./routes/orderRoutes')
+
+// importing Routes for Apis start here
+    const userRoutes = require('./routes/userRoutes')
+    const productRoutes = require('./routes/productRoutes')
+    const categoryRoutes = require('./routes/categoryRoutes')
+    const cartRoutes = require('./routes/cartRoutes')
+    const orderRoutes = require('./routes/orderRoutes')
+// importing Routes for Apis end here
 
 require("dotenv/config");
   app.use(express.json());
@@ -15,12 +18,13 @@ require("dotenv/config");
         databaseConnection()
     // Database Connectivity function end here
 
-    app.use("/api/user",userRoutes)
-    app.use("/api/product",productRoutes)
-    app.use("/api/category",categoryRoutes)
-    app.use("/api/cart",cartRoutes)
-    app.use("/api/order",orderRoutes)
-
+    // Usage for Routes start here
+        app.use("/api/user",userRoutes)
+        app.use("/api/product",productRoutes)
+        app.use("/api/category",categoryRoutes)
+        app.use("/api/cart",cartRoutes)
+        app.use("/api/order",orderRoutes)
+    //Usage for Routes end here
   
 const port = process.env.PORT
 app.listen(port || 5000 ,()=>{

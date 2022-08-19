@@ -27,6 +27,10 @@ const ProductSchema = new mongoose.Schema(
     price: {
       type: Number,
     },
+    status:{
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

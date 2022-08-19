@@ -97,11 +97,33 @@ const DeleteProducts = async(req,res) => {
         })
     }
 }
+const ProductsStatus = async (req,res) => {
+const ids = req.params.id;
+try{
+    const prostatus = await Product.findByIdAndUpdate(
+        ids ,{
+            status: req.body.status
+        },
+        {new : true}
+    )
+    res.send({
+        message:"Status Changed Successfully",
+        status:201,
+        data:prostatus
+    })
+}catch(err){
+    res.send({
+        message:"Status Not Changed",
+        status:404
+    })
+}
+}
 
 module.exports = { 
     AddProducts ,
     GetAllProducts,
     GetSingleProducts,
     UpdateProducts,
-    DeleteProducts
+    DeleteProducts,
+    ProductsStatus
 }

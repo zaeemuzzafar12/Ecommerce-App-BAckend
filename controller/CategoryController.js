@@ -105,10 +105,33 @@ const DeleteCategory = async (req,res) => {
 }
 // Delete Category Api end here
 
+// Status Changes Api start here
+const StatusCategory = async (req,res) => {
+    const query = req.params.id;
+    try{
+        const statuschanged = await Category.findByIdAndUpdate(
+            query,
+            {status : req.body.status},
+            {new : true}
+        )
+        res.send({
+            message:"Status Changed Successfully",
+            status:200,
+            data:statuschanged
+        })
+    }catch(err){
+        res.send({
+            message:"Status Not Changed",
+            status:404
+        })
+    }
+}
+// Status Changes Api end here
 module.exports = { 
     AddCategory,
     GetAllCategory,
     SingleCategoryById,
     UpdateCategory,
-    DeleteCategory
+    DeleteCategory,
+    StatusCategory
 }

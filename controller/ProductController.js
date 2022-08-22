@@ -1,17 +1,23 @@
 const Product = require('../models/ProductsModel')
 
-const AddProducts = async (req,res) => {
+  
+  
+const AddProducts =  async (req,res) => {
+
     try{
+            const filename = req.file.path;
+            const basepath = `${req.protocol}://${req.get('host')}`;
+            const final = `${basepath}/${filename}`
+            
         const addpro = new Product ({
             title: req.body.title,
             description: req.body.description,
-            image: req.body.image,
+            image: `${final}`.replace(/\\/g, "/"),
             categories: req.body.categories,
             size: req.body.size,
             color: req.body.color,
             price: req.body.price,
         })
-
         const savedProducts = await addpro.save();
         res.send({
             message:"Products Added Successfully",
@@ -46,7 +52,8 @@ const GetAllProducts = async (req,res) => {
 const GetSingleProducts = async (req,res) => {
     const ids = req.params.id;
     try{
-        const sp = await Product.findById(ids);
+        const sp = await Product.findById(ids)
+        .populate("categories", "_id  name image status");
         res.send({
             message:"Product Data Fetch Successfully",
             status:200,
@@ -125,5 +132,6 @@ module.exports = {
     GetSingleProducts,
     UpdateProducts,
     DeleteProducts,
-    ProductsStatus
+    ProductsStatus,
+    // AddProductImage
 }

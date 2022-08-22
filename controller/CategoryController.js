@@ -3,9 +3,12 @@ const Category = require('../models/CategoryModel')
 //Create Category Api start here
 const AddCategory = async (req,res) => {
     try{
+        const filename = req.file.path;
+        const basepath = `${req.protocol}://${req.get('host')}`;
+        const final = `${basepath}/${filename}`
         const addcat = new Category ({
             name: req.body.name,
-            image: req.body.image
+            image:  `${final}`.replace(/\\/g, "/"),
         })
 
         const savedCategory = await addcat.save();

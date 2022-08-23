@@ -8,11 +8,13 @@ const databaseConnection = require('./databaseConnection');
     const categoryRoutes = require('./routes/categoryRoutes')
     const cartRoutes = require('./routes/cartRoutes')
     const orderRoutes = require('./routes/orderRoutes')
+    const stripeRoutes = require('./routes/stripeRoutes')
 // importing Routes for Apis end here
 
+// for using env file secret key start here
 require("dotenv/config");
   app.use(express.json());
-
+// for using env file secret key end here
   
     // Database Connectivity function start here
         databaseConnection()
@@ -24,6 +26,7 @@ require("dotenv/config");
         app.use("/api/category",categoryRoutes)
         app.use("/api/cart",cartRoutes)
         app.use("/api/order",orderRoutes)
+        app.use("/api/stripe",stripeRoutes)
     //Usage for Routes end here
   
 const port = process.env.PORT

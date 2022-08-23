@@ -16,15 +16,13 @@ const AddOrders = async (req,res) => {
         })
     }
 }
-const GetSpecificUserOrder =  async(req,res) => {
+const GetSpecificUserOrder =  async (req,res) => {
     try{
         const UsersOrders = await Order
         .find({userId : req.params.userId  })
-        .populate( 'userId').populate('products.productsId')
-       
-        
-  
-    console.log("products", UsersOrders)
+        .populate( 'userId')
+        .populate({path:'products.productsId',
+            populate:{path:'categories'}})
 
         res.send({
             total:UsersOrders.length,

@@ -3,14 +3,14 @@ const mongoose = require("mongoose");
 const OrderSchema = new mongoose.Schema(
   {
     userId: {
-      type: String,
-      required: true,
-      unique: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'User'
     },
     products: [
       {
         productsId: {
-          type: String,
+          type: mongoose.Schema.Types.ObjectId,
+          ref:'Product'
         },
         quantity: {
           type: Number,

@@ -2,12 +2,14 @@ const router = require('express').Router();
 const { 
     CreateCarts,
     DeleteCart,
-    GetCart
+    GetCart,
+    UpdateCart
  } = require('../controller/CartController')
 
 
  router.post('/addcart' , CreateCarts)
- router.delete('/deletecart' , DeleteCart)
- router.get('/allcartitem' , GetCart)
+ router.get('/:userId' , GetCart)
+ router.delete('/:id' , DeleteCart)
+ router.put('/:id' , UpdateCart)
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express()
 const databaseConnection = require('./databaseConnection');
-
+const cors = require('cors')
 // importing Routes for Apis start here
     const userRoutes = require('./routes/userRoutes')
     const productRoutes = require('./routes/productRoutes')
@@ -14,6 +14,7 @@ const databaseConnection = require('./databaseConnection');
 // for using env file secret key start here
 require("dotenv/config");
   app.use(express.json());
+  app.use(cors())
 // for using env file secret key end here
   
     // Database Connectivity function start here

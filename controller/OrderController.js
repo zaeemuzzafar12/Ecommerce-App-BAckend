@@ -1,5 +1,6 @@
 const Order = require("../models/OrderModel")
 
+//create orders api start here
 const AddOrders = async (req,res) => {
     try{
     const addorder = new Order (req.body);
@@ -16,6 +17,7 @@ const AddOrders = async (req,res) => {
         })
     }
 }
+//create orders api end here
 const GetSpecificUserOrder =  async (req,res) => {
     try{
         const UsersOrders = await Order

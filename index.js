@@ -33,8 +33,13 @@ require("dotenv/config");
     app.get('/' , (req,res) => {
         res.send("iam just testing")
     })
-  
+
+// app.listen(5000);
+
 const port = process.env.PORT
-app.listen(port || 50354 ,()=>{
-    console.log(`Server is running on ${port} port`)
+const server = app.listen(`${port}` || 5000 ,()=>{
+    const ports = server.address().port;
+    console.log(`Express Server is running on ${ports} port`)
 })
+
+

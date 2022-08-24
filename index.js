@@ -29,6 +29,10 @@ require("dotenv/config");
         app.use("/api/order",orderRoutes)
         app.use("/api/stripe",stripeRoutes)
     //Usage for Routes end here
+
+    app.get('/work' , (req,res) => {
+        res.send("iam just testing")
+    })
   
 const port = process.env.PORT
 app.listen(port || 5000 ,()=>{

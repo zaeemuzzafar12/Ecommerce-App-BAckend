@@ -31,7 +31,7 @@ require("dotenv/config");
     //Usage for Routes end here
 
     app.get('/' , (req,res) => {
-        res.send("iam just testing")
+        res.send("iam just testing around herou server only")
     })
 
 // app.listen(5000);

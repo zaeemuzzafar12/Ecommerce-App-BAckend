@@ -30,7 +30,7 @@ require("dotenv/config");
         app.use("/api/stripe",stripeRoutes)
     //Usage for Routes end here
 
-    app.get('/work' , (req,res) => {
+    app.get('/' , (req,res) => {
         res.send("iam just testing")
     })
   

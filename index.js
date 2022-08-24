@@ -35,6 +35,6 @@ require("dotenv/config");
     })
   
 const port = process.env.PORT
-app.listen(port || 3001 ,()=>{
+app.listen(port || 50354 ,()=>{
     console.log(`Server is running on ${port} port`)
 })

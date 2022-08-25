@@ -4,7 +4,7 @@ const CreateSlider = async (req,res) => {
 try{
     const filename = req.file.path;
     const basepath = `${req.protocol}://${req.get('host')}/images/products/`;
-    const final = `${basepath}/${filename}`
+    const final = `${basepath}${filename}`
     
     const createslider = new Slider({
         name: req.body.name,

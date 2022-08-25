@@ -3,7 +3,7 @@ const Slider = require('../models/SliderModel');
 const CreateSlider = async (req,res) => {
 try{
     const filename = req.file.path;
-    const basepath = `${req.protocol}://${req.get('host')}`;
+    const basepath = `${req.protocol}://${req.get('host')}/images/products/`;
     const final = `${basepath}/${filename}`
     
     const createslider = new Slider({

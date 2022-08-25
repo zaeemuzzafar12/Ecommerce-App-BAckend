@@ -2,7 +2,7 @@ const multer = require('multer')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'images/products')
+      cb(null, 'images/products/')
     },
     filename: function (req, file, cb) {
       const filename = file.originalname.split(' ').join('-')

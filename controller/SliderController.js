@@ -12,6 +12,7 @@ try{
     });
 
     const slider = await createslider.save();
+    console.log(slider)
     res.send({
         message:"Slider Created Successfully",
         status:200,
@@ -25,6 +26,21 @@ try{
 }
 }
 
+const GetAllSliders = async (req,res) => {
+   try{ 
+    const getslider = await Slider.find();
+    res.send({
+        message:"Slider Fetch Success",
+        status:200,
+        data:getslider
+    })}catch(err){
+        res.send({
+            message:"Slider Not Fetch",
+            status:404
+        }) 
+    }
+}
 module.exports = {
-    CreateSlider
+    CreateSlider,
+    GetAllSliders
 }

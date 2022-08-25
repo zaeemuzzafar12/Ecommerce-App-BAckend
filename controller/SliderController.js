@@ -9,6 +9,7 @@ try{
     const createslider = new Slider({
         name: req.body.name,
         image: `${final}`.replace(/\\/g, "/"),
+        desc: req.body.desc,
     });
 
     const slider = await createslider.save();
@@ -40,7 +41,29 @@ const GetAllSliders = async (req,res) => {
         }) 
     }
 }
+
+const UpdateSlider = async (req,res) => {
+    const ids = req.params.id;
+   try{ const updateslider = await Slider.findByIdAndUpdate(
+        ids,
+        {$set:req.body},
+        {new: true}
+    )
+    res.send({
+        message:"Slider Details Updated",
+        status:201,
+        data:updateslider
+    })
+}catch(err){
+    res.send({
+        message:"Slider Details Not Updated",
+        status:404
+    })
+}
+}
+
 module.exports = {
     CreateSlider,
-    GetAllSliders
+    GetAllSliders,
+    UpdateSlider
 }

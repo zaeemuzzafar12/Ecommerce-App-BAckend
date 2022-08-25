@@ -4,12 +4,11 @@ const SliderSchema = new mongoose.Schema({
     name:{
              type:String ,
             required:true ,
-            unique:true 
+          
             },
     image: { 
             type:String , 
-            required:true, 
-            unique:true
+            required:true,
             }
 },
 { timestamps : true}

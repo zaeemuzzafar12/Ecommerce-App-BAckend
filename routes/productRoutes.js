@@ -1,4 +1,4 @@
-const ImageUploader = require('../helper/ImageUploader')
+const ImageUploadedByProduct = require('../helper/ImageUploadedByProduct')
 const router = require('express').Router();
 const {
     AddProducts,
@@ -11,7 +11,7 @@ const {
 } = require('../controller/ProductController')
 
 // router.post('/productimage' , AddProductImage);
-router.post('/addproducts' , ImageUploader.upload ,  AddProducts);
+router.post('/addproducts' , ImageUploadedByProduct.upload ,  AddProducts);
 router.get('/getallproducts' , GetAllProducts);
 router.get('/getproductid/:id', GetSingleProducts);
 router.put('/update/:id' , UpdateProducts);

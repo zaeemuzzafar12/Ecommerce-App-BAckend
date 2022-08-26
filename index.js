@@ -14,8 +14,10 @@ const cors = require('cors')
 
 // for using env file secret key start here
 require("dotenv/config");
+  app.use(express.static(__dirname + '/public'));
   app.use(express.json());
   app.use(cors())
+
 // for using env file secret key end here
   
     // Database Connectivity function start here

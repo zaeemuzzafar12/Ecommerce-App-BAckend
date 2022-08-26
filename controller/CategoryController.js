@@ -4,11 +4,13 @@ const Category = require('../models/CategoryModel')
 const AddCategory = async (req,res) => {
     try{
         const filename = req.file.path;
-        const basepath = `${req.protocol}://${req.get('host')}`;
-        const final = `${basepath}/${filename}`
+        const files = `${filename}`.replace("public","");
+        // const basepath = `${req.protocol}://${req.get('host')}`;
+        // const final = `${basepath}/${filename}`
+
         const addcat = new Category ({
             name: req.body.name,
-            image:  `${final}`.replace(/\\/g, "/"),
+            image:  `${files}`.replace(/\\/g, "/"),
         })
 
         const savedCategory = await addcat.save();

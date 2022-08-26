@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const  ImageUploader  = require('../helper/ImageUploader')
+const  ImageUploaderBySlider  = require('../helper/ImageUploaderBySlider')
 const { 
     CreateSlider ,
     GetAllSliders,
     UpdateSlider
 } = require('../controller/SliderController')
 
-router.post('/addslider' , ImageUploader.upload , CreateSlider )
+router.post('/addslider' , ImageUploaderBySlider.upload , CreateSlider )
 router.get('/getallslider' , GetAllSliders)
 router.put('/:id' , UpdateSlider)
 

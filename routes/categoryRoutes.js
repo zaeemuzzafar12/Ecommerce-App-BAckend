@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const ImageUploader = require('../helper/ImageUploader')
+const ImageUploadedByCategory = require('../helper/ImageUploadedByCategory')
 const {
     AddCategory,
     GetAllCategory,
@@ -9,7 +9,7 @@ const {
     StatusCategory
 } = require('../controller/CategoryController')
 
-router.post('/addcatgory' , ImageUploader.upload , AddCategory);
+router.post('/addcatgory' , ImageUploadedByCategory.upload , AddCategory);
 router.get('/allcategory', GetAllCategory);
 router.get('/category/:id' , SingleCategoryById);
 router.put('/:id' , UpdateCategory);

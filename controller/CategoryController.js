@@ -31,7 +31,7 @@ const AddCategory = async (req,res) => {
 //Get All Category Api start here
 const GetAllCategory = async (req,res) => {
 try{
-    const alldata = await Category.find();
+    const alldata = await Category.find().sort({"createdAt" : -1})
     res.send({
         total:alldata.length,
         message:"All Catgeories Fetch Successfully",

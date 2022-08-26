@@ -35,8 +35,12 @@ const AddProducts =  async (req,res) => {
 }
 
 const GetAllProducts = async (req,res) => {
+    let filter = {};
+    if(req.query.categories){
+        filter = { categories : req.query.categories.split(",") } ;
+    }
     try{
-        const alldata = await Product.find()
+        const alldata = await Product.find(filter).populate('categories')
         res.send({
             total:alldata.length,
             message:"All Products Fetch Successfully",

@@ -6,18 +6,20 @@ const AddProducts =  async (req,res) => {
 
     try{
             const filename = req.file.path;
-            const basepath = `${req.protocol}://${req.get('host')}`;
-            const final = `${basepath}/${filename}`
+            const files = `${filename}`.replace("public","")
+            // const basepath = `${req.protocol}://${req.get('host')}`;
+            // const final = `${basepath}/${filename}`
             
         const addpro = new Product ({
             title: req.body.title,
             description: req.body.description,
-            image: `${final}`.replace(/\\/g, "/"),
+            image: `${files}`.replace(/\\/g, "/"),
             categories: req.body.categories,
             size: req.body.size,
             color: req.body.color,
             price: req.body.price,
         })
+        console.log(addpro)
         const savedProducts = await addpro.save();
         res.send({
             message:"Products Added Successfully",

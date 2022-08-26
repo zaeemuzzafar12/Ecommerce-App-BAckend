@@ -7,10 +7,9 @@ const {
     UpdateProducts,
     DeleteProducts,
     ProductsStatus,
-    // AddProductImage
 } = require('../controller/ProductController')
 
-// router.post('/productimage' , AddProductImage);
+
 router.post('/addproducts' , ImageUploadedByProduct.upload ,  AddProducts);
 router.get('/getallproducts' , GetAllProducts);
 router.get('/getproductid/:id', GetSingleProducts);

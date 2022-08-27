@@ -131,6 +131,31 @@ try{
     })
 }
 }
+const SearchProducts = async (req,res) => {
+   
+     try{
+        const searcheddata = await Product.find(
+            {
+                "$or":[
+                    { "title": { $regex: req.params.keyword} }
+                ]
+            }
+            );
+            console.log(searcheddata) 
+        res.send({
+            total:searcheddata.length,
+            message: "Product Search Successfully",
+            status:200,
+            data:searcheddata
+        })
+    }catch(err){
+        res.send({
+            message: "Product Not Search",
+            status:404
+        })
+    }
+}
+
 
 module.exports = { 
     AddProducts ,
@@ -139,5 +164,6 @@ module.exports = {
     UpdateProducts,
     DeleteProducts,
     ProductsStatus,
+    SearchProducts
     // AddProductImage
 }

@@ -2,17 +2,14 @@ const mongoose = require('mongoose');
 
 const NewsletterSchema = new mongoose.Schema({
     emailTo:{
-             type:String ,
-            required:true ,
+             type:String
           
             },
     message: { 
-            type:String , 
-            required:true,
+            type:String
             },
         desc:{
-                type:String,
-                required:true
+                type:String
         }
 },
 { timestamps : true}

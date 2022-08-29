@@ -1,25 +1,49 @@
 const Newsletter = require('../models/NewsletterModel');
-
+var nodemailer = require('nodemailer')
 const ForSubscription = async (req,res) => {
-    try{
-    const subscribed = new Newsletter({
-        emailTo : req.body.emailTo
+try{
+    const subscribed = Newsletter({
+        emailTo : req.body.emailTo,
+        message : req.body.message,
+        desc: req.body.desc
     })
-
-    const emails = await subscribed.save();
-    console.log(emails , subscribed)
-    res.send({
-        message:"Email Subscribed Successfully",
-        status:200,
-        data:emails
-    })
+    
+    const email = await subscribed.save();
+    let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.USER ,
+          pass: process.env.PASS
+        },
+      });
+    
+      let options = await transporter.sendMail({
+        from : process.env.USER,
+        to : email.emailTo,
+        subject: email.message || "Email Subscribed Successfully",
+        text: email.desc || "Testing complete"
+      })
+      transporter.sendMail(options , (err,info) => {
+        if(err){ 
+            res.send({
+                message:"Email Not Subscribed",
+                status:404
+        })
+        }else{
+            console.log("info",email,info)
+            res.send({
+                message:"Email Subscribed Successfully",
+                status:200,
+                data:info.response
+            })
+        }
+      })
+console.log(email,info)
+   
 } catch(err){
-    res.send({
-        message:"Email Not Subscribed",
-        status:404
-    })
-}
+    console.log("Email not Subscribed")
 
+}
 }
 
 module.exports = {

@@ -33,7 +33,7 @@ require("dotenv/config");
         app.use("/api/order",orderRoutes)
         app.use("/api/stripe",stripeRoutes)
         app.use("/api/slider",sliderRoutes)
-        app.use("/api/mail",newsletterRoutes)
+        app.use("/api/newsletter",newsletterRoutes)
     //Usage for Routes end here
 
     app.get('/' , (req,res) => {

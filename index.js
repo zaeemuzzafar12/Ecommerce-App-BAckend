@@ -10,6 +10,7 @@ const cors = require('cors')
     const orderRoutes = require('./routes/orderRoutes')
     const stripeRoutes = require('./routes/stripeRoutes')
     const sliderRoutes = require('./routes/sliderRoutes')
+    const newsletterRoutes = require('./routes/newsletterRoutes')
 // importing Routes for Apis end here
 
 // for using env file secret key start here
@@ -32,6 +33,7 @@ require("dotenv/config");
         app.use("/api/order",orderRoutes)
         app.use("/api/stripe",stripeRoutes)
         app.use("/api/slider",sliderRoutes)
+        app.use("/api/mail",newsletterRoutes)
     //Usage for Routes end here
 
     app.get('/' , (req,res) => {

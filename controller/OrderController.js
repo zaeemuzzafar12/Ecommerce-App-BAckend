@@ -1,4 +1,5 @@
 const Order = require("../models/OrderModel")
+const Product = require("../models/ProductsModel")
 
 //create orders api start here
 const AddOrders = async (req,res) => {
@@ -45,7 +46,9 @@ const AllOrders = async (req,res) => {
     const offset = req.query.offset;
     const skip = (offset - 1) * limit;
     try{
-        const alldata = await Order.find().limit(limit).skip(skip)
+        const alldata = await Order
+        .find().populate('userId')
+        .populate('products.productsId').limit(limit).skip(skip)
         res.send({
             message:"All Orders Fetch Successfully",
             status:200,

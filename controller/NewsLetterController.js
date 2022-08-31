@@ -20,19 +20,19 @@ try{
       let options = await transporter.sendMail({
         from : process.env.USER,
         to : email.emailTo,
-        subject: email.message || "Email Subscribed Successfully",
+        subject: email.message || "NewsLetter Subscribed Successfully",
         text: email.desc || "Testing complete"
       })
       transporter.sendMail(options , (err,info) => {
         if(err){ 
             res.send({
-                message:"Email Not Subscribed",
+                message:"NewsLetter Not Subscribed",
                 status:404
         })
         }else{
             console.log("info",email,info)
             res.send({
-                message:"Email Subscribed Successfully",
+                message:"NewsLetter Subscribed Successfully",
                 status:200,
                 data:info.response
             })

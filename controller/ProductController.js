@@ -37,7 +37,7 @@ const GetAllProducts = async (req, res) => {
     filter = { categories: req.query.categories.split(",") };
   }
   try {
-    const alldata = await Product.find(filter).populate("categories");
+    const alldata = await Product.find(filter).populate("categories").sort({createdAt: -1 });
     res.send({
       total: alldata.length,
       message: "All Products Fetch Successfully",
@@ -71,11 +71,23 @@ const GetSingleProducts = async (req, res) => {
   }
 };
 const UpdateProducts = async (req, res) => {
+  const filename = req?.file?.path;
+  const files = `${filename}`.replace("public","");
   const paramsids = req.params.id;
   try {
     const updateProducts = await Product.findByIdAndUpdate(
       paramsids,
-      { $set: req.body },
+      { $set: 
+            {
+              title: req.body.title,
+              description : req.body.description,
+              categories : req.body.categories,
+              size : req.body.size,
+              color : req.body.color,
+              price : req.body.price,
+              image :`${files}`.replace(/\\/g, "/"),
+             }
+            },
       { new: true }
     );
 
@@ -111,10 +123,8 @@ const ProductsStatus = async (req, res) => {
   const ids = req.params.id;
   try {
     const prostatus = await Product.findByIdAndUpdate(
-      ids,
-      {
-        status: req.body.status,
-      },
+      {_id : ids},
+      {"$set" :  {status: req.body.status}},
       { new: true }
     )
     res.send({

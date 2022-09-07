@@ -48,7 +48,7 @@ const AllOrders = async (req,res) => {
     try{
         const alldata = await Order
         .find().populate('userId')
-        .populate('products.productsId').limit(limit).skip(skip)
+        .populate('products.productsId').limit(limit).skip(skip).sort({createdAt : -1})
         res.send({
             message:"All Orders Fetch Successfully",
             status:200,

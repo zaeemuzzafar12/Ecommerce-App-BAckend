@@ -5,6 +5,7 @@ const AddCategory = async (req,res) => {
     try{
         const filename = req.file.path;
         const files = `${filename}`.replace("public","");
+
         // const basepath = `${req.protocol}://${req.get('host')}`;
         // const final = `${basepath}/${filename}`
 
@@ -69,11 +70,17 @@ const SingleCategoryById = async (req,res) => {
 
 //Update Category Api start here
 const UpdateCategory = async (req,res) => {
+    const filename = req?.file?.path;
+    const files = `${filename}`.replace("public","");
+
     const query = req.params.id
 try{
     const updateCat = await Category.findByIdAndUpdate(
         query ,
-        {$set : req.body } ,
+        {$set : {
+            name: req.body.name,
+            image:  `${files}`.replace(/\\/g, "/"),
+        } } ,
         {new : true}
     )
     res.send({
@@ -94,7 +101,7 @@ try{
 const DeleteCategory = async (req,res) => {
     const query = req.params.id;
     try{
-        const DeleteCategory = await Category.findByIdAndDelete(query);
+        const DeleteCategory = await Category.findByIdAndDelete(query)
         res.send({
             message:"Category Delete Successfully",
             status:200,
@@ -115,15 +122,17 @@ const StatusCategory = async (req,res) => {
     const query = req.params.id;
     try{
         const statuschanged = await Category.findByIdAndUpdate(
-            query,
-            {status : req.body.status},
+           { _id: query} ,
+            {"$set" : {status : req.body.status}},
             {new : true}
         )
         res.send({
             message:"Status Changed Successfully",
-            status:200,
+            status:201,
             data:statuschanged
+            
         })
+        
     }catch(err){
         res.send({
             message:"Status Not Changed",

@@ -116,7 +116,7 @@ const ProductsStatus = async (req, res) => {
         status: req.body.status,
       },
       { new: true }
-    );
+    )
     res.send({
       message: "Status Changed Successfully",
       status: 201,

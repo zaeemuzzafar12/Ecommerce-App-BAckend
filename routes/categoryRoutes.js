@@ -12,7 +12,7 @@ const {
 router.post('/addcatgory' , ImageUploadedByCategory.upload , AddCategory);
 router.get('/allcategory', GetAllCategory);
 router.get('/category/:id' , SingleCategoryById);
-router.put('/:id' , UpdateCategory);
+router.put('/:id' , ImageUploadedByCategory.upload , UpdateCategory);
 router.delete('/:id' , DeleteCategory);
 router.put('/status/:id' , StatusCategory);
 

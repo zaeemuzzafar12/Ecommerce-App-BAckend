@@ -4,12 +4,18 @@ const jwt = require('jsonwebtoken');
 
 // Register Api start here
 const UserRegistration = async (req,res) => {
-    const newUsers = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: CryptoJS.AES.encrypt( req.body.password ,process.env.SECRET_PASSWORD).toString(),
-    });
     try{
+        const filename = req?.file?.path;
+        const files = `${filename}`?.replace("public", "");
+    
+        const newUsers = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: CryptoJS.AES.encrypt( req.body.password ,process.env.SECRET_PASSWORD).toString(),
+            avator :  `${files}`?.replace(/\\/g, "/"),
+            status: req.body.status
+    
+        });
         const savedUser = await newUsers.save()
         res.send({
             message:"User Created Successfully",
@@ -190,6 +196,28 @@ try{
 }
 // Status change Api end here
 
+const UserStatus = async (req,res) => {
+    const Ids = req.params.id;
+try{
+    const statuss = await User.findByIdAndUpdate(
+       { _id : Ids}, 
+       { $set:req.body} ,
+        {new :true}
+    )
+    const {status , ...other} = statuss
+    res.send({
+        message:"Status Change Successfully",
+        status:200,
+        data:status
+    })
+}catch(err){
+    res.send({
+        message:"Status Not Changed",
+        status:404
+    })
+}
+
+}
 
 
 module.exports = {
@@ -199,5 +227,6 @@ module.exports = {
     UserUpdate,
     UserDelete,
     UserProfile,
-    UserAdmin
+    UserAdmin,
+    UserStatus
 }

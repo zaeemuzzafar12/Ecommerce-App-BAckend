@@ -7,6 +7,10 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    avator:{
+      type:String,
+      required : true
+    },
     email: {
       type: String,
       required: true,
@@ -17,6 +21,10 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
       type: Boolean,
       default: false,
     },

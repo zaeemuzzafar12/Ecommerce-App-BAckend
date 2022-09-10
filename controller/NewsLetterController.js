@@ -46,6 +46,58 @@ console.log(email,info)
 }
 }
 
+const GetNewsLetter = async (req,res) => {
+    try{
+       await Newsletter.find
+       (
+        {
+          desc:{$ne : null} ,
+         message:{$ne : null},
+         emailTo:{$ne : null},
+        }
+         ).exec((err,response) => {
+        if(err){
+          res.send({
+            message:"No NewsLetter Found",
+            status:404
+          })
+        }else{
+          res.send({
+            total: response?.length,
+            message:"NewsLetter Fetch Successfully",
+            status:200,
+            data:response
+          })
+        }
+       })
+    
+  } catch(err){
+    res.send({
+      message:"No NewsLetter Found",
+      status:404
+    })
+}
+
+}
+
+const DeleteUserSubscription = async (req,res) => {
+  try {
+    const deleteUser = await Newsletter.deleteOne({_id : req.params.id});
+    res.send({
+      message:"User Subscription Finished",
+      status:200,
+      data: deleteUser
+    })
+  } catch(err){
+    res.send({
+      message:"User Subscription Not Finished",
+      status:404
+    })
+  }
+}
+
 module.exports = {
-    ForSubscription
+    ForSubscription,
+    GetNewsLetter,
+    DeleteUserSubscription
 }

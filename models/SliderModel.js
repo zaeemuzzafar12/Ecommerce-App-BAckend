@@ -5,7 +5,7 @@ const SliderSchema = new mongoose.Schema({
              type:String ,
             required:true ,
           
-            },
+        },
     image: { 
             type:String , 
             required:true,
@@ -13,6 +13,10 @@ const SliderSchema = new mongoose.Schema({
         desc:{
                 type:String,
                 required:true
+        },
+        status:{
+               type:Boolean,
+               default:false 
         }
 },
 { timestamps : true}

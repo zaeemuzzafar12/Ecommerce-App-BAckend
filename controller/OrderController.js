@@ -79,18 +79,39 @@ const DeleteOrders = async (req,res) => {
          })
     }
 }
+// const StatusChange = async (req,res) => {
+//     const ids = req.params.id;
+//     try{
+//         const statusChanged = await Order.findByIdAndUpdate(
+//             { _id : ids},
+//             { status: req.body.status},
+//             {new:true}
+//         )
+//         res.send({
+//             message:"Order Status Changed",
+//             status:200,
+//             data:statusChanged
+//         })
+//     }catch(err){
+//         res.send({
+//             message:"Order Status Not Changed",
+//             status:404
+//         })
+//     }
+// }
+
 const StatusChange = async (req,res) => {
-    const ids = req.params.id;
     try{
-        const statusChanged = await Order.findByIdAndUpdate(
-            ids,
-            { status: req.body.status},
-            {new:true}
-        )
+       const status_update = await Order.updateOne({_id:req.params.id},{
+            $set:{
+                status:req.body.status,
+            }
+        });
+
         res.send({
             message:"Order Status Changed",
             status:200,
-            data:statusChanged
+            data:status_update
         })
     }catch(err){
         res.send({
@@ -99,6 +120,7 @@ const StatusChange = async (req,res) => {
         })
     }
 }
+
 const UpdateOrders  = async (req,res) => {
     const orderIds = req.params.id;
     try{

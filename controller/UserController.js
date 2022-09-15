@@ -154,7 +154,6 @@ const UserProfile = async (req,res) => {
     const userid = req.params.id
     try{
         const getUserProfile = await User.findById(userid).exec();
-        console.log(getUserProfile)
         const  { password , ...userdetails  } = getUserProfile?._doc
         res.send({
             message:"User Profile Data Fetch Successfully",

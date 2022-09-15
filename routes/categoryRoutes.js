@@ -6,7 +6,8 @@ const {
     SingleCategoryById,
     UpdateCategory,
     DeleteCategory,
-    StatusCategory
+    StatusCategory,
+    GetActiveCategory
 } = require('../controller/CategoryController')
 
 router.post('/addcatgory' , ImageUploadedByCategory.upload , AddCategory);
@@ -15,5 +16,6 @@ router.get('/category/:id' , SingleCategoryById);
 router.put('/:id' , ImageUploadedByCategory.upload , UpdateCategory);
 router.delete('/:id' , DeleteCategory);
 router.put('/status/:id' , StatusCategory);
+router.get('/getactivecategory' , GetActiveCategory)
 
 module.exports = router;

@@ -7,7 +7,8 @@ const {
     UpdateProducts,
     DeleteProducts,
     ProductsStatus,
-    SearchProducts
+    SearchProducts,
+    GetActiveProducts
 } = require('../controller/ProductController')
 
 
@@ -18,5 +19,6 @@ router.put('/update/:id' , ImageUploadedByProduct.upload , UpdateProducts);
 router.delete('/:id' , DeleteProducts);
 router.put('/status/:id' , ProductsStatus);
 router.get('/search/:keyword' , SearchProducts)
+router.get('/getactiveproducts' , GetActiveProducts)
 
 module.exports = router;

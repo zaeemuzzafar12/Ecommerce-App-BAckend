@@ -21,7 +21,7 @@ try{
         from : process.env.USER,
         to : email.emailTo,
         subject: email.message || "NewsLetter Subscribed Successfully",
-        text: email.desc || "Testing complete"
+        text: email.desc || "Email Testing Completed"
       })
       transporter.sendMail(options , (err,info) => {
         if(err){ 

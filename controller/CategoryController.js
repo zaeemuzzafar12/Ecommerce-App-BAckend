@@ -141,11 +141,31 @@ const StatusCategory = async (req,res) => {
     }
 }
 // Status Changes Api end here
+
+const GetActiveCategory = async (req,res) => {
+    try
+    {const activecategory = await Category.find({ status : { $eq : true }})
+
+    res.send({
+        total : activecategory.length,
+        message: "Get Active Categories",
+        status: 200,
+        data: activecategory
+    })
+    } catch(err){
+        res.send({
+            message: "Not Active Categories",
+            status: 404,
+        })
+
+    }
+}
 module.exports = { 
     AddCategory,
     GetAllCategory,
     SingleCategoryById,
     UpdateCategory,
     DeleteCategory,
-    StatusCategory
+    StatusCategory,
+    GetActiveCategory
 }

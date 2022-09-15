@@ -93,7 +93,7 @@ const UpdateProducts = async (req, res) => {
 
     res.send({
       message: "Products Updated Successfully",
-      status: 201,
+      status: 200,
       data: updateProducts,
     });
   } catch (err) {
@@ -159,6 +159,22 @@ const SearchProducts = async (req, res) => {
   }
 };
 
+const GetActiveProducts = async (req,res) => {
+try{
+    const activeProducts = await Product.find({ status : { $eq : true } })
+  res.send({
+    message:"Active Products",
+    status:200,
+    data: activeProducts
+  })
+}catch(err){
+  res.send({
+    message:"Not Active Products",
+    status:404
+  })
+}
+}
+
 module.exports = {
   AddProducts,
   GetAllProducts,
@@ -167,5 +183,6 @@ module.exports = {
   DeleteProducts,
   ProductsStatus,
   SearchProducts,
+  GetActiveProducts,
   // AddProductImage
 };
